@@ -21,7 +21,6 @@ class MyPlugin(Star):
         user_name = event.get_sender_name()
         # 获取配置
         command_text:str = self.config.commandText
-        # {'commandText': '小星小星', 'sub_config': {'apiUrl': 'http://localhost:8080/api/qqMsg', 'enc': 'mavis'}}
         api_url:str = self.config.sub_config["apiUrl"]
         api_enc:str = self.config.sub_config["enc"]
         message_str = event.message_str
@@ -29,8 +28,12 @@ class MyPlugin(Star):
         user_id = event.get_sender_id()
         #  判断消息是否以指定命令开头并且是群聊消息
         if message_str.startswith(command_text):
-            response = httpx.post(api_url,json={"message":message_str,"group_id":group_id,"user_id":user_id})
-            yield event.plain_result(f"Hello, {user_name}:{user_id}in Group{group_id}, 你发了 {message_str}{api_url}{api_enc}!") 
+            # 设置超时时间
+            timeout = httpx.Timeout(timeout=30.0, connect=10.0)
+            response = httpx.post(api_url,json={"context":message_str,"groupId":group_id,"userId":user_id,"enc":api_enc},timeout=timeout)
+            result:str = response.text
+            # 发送消息
+            yield event.plain_result(f"{result}") 
         
        
     async def terminate(self):
