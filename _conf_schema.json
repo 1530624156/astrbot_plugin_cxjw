@@ -1,0 +1,25 @@
+{
+  "commandText": {
+    "description": "唤醒词",
+    "type": "string",
+    "hint": "插件唤醒词：用于触发此插件的命令 如：小星小星",
+    "obvious_hint": true
+  },
+  "sub_config": {
+    "description": "接口配置",
+    "type": "object",
+    "hint": "接口信息配置",
+    "items": {
+      "apiUrl": {
+        "description": "API_URL",
+        "type": "string",
+        "hint": "接口地址"
+      },
+      "enc": {
+        "description": "ENC",
+        "type": "string",
+        "hint": "校验码"
+      }
+    }
+  }
+}

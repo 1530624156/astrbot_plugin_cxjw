@@ -1,9 +1,4 @@
-# helloworld
+# AstrBot - Cxjw 
 
-AstrBot 插件模板
-
-A template plugin for AstrBot plugin feature
-
-# 支持
-
-[帮助文档](https://astrbot.app)
+超星集团教务部门自用插件
+无敏感信息 无信息泄露 仅作为统一入口
